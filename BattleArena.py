@@ -1,6 +1,6 @@
 import pygame
 from Constants import Constants as con
-from players.PlayerTemplate import PlayerTemplate
+from classes.AgentTemplate import AgentTemplate
 
 
 class BattleArena(object):
@@ -8,21 +8,22 @@ class BattleArena(object):
         self.game_over = False
 
         # Create spritelist
-        self.player_list = pygame.sprite.Group()
+        self.agent_list = pygame.sprite.Group()
+        self.bullet_list = pygame.sprite.Group()
         self.all_sprites_list = pygame.sprite.Group()
 
         # Create players
 
-        player = PlayerTemplate()
-        self.player_list.add(player)
-        self.all_sprites_list.add(player)
+        self.player = AgentTemplate(0, self.all_sprites_list, self.bullet_list)
+        self.agent_list.add(self.player)
+        self.all_sprites_list.add(self.player)
 
     def process_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return True
             if event.type == pygame.MOUSEBUTTONDOWN:
-                return True
+                self.player.shoot()
             # Other events
 
         return False
@@ -34,10 +35,22 @@ class BattleArena(object):
 
             # Check for collisions
 
+            # player colides with bullet,
+            # False: does not remove bullet from sprite list
+            bullet_collision = pygame.sprite.spritecollide(
+                self.player, self.bullet_list, False
+            )
+
+            # for bullet in bullet_collision:
+            #     print("Player got hit")
+
             # Update on collisions
 
             # If one player left
             # game over
+
+            if self.agent_list.__len__() == 0:
+                self.game_over = True
 
     def display_frame(self, screen):
         """Display everything to the screen for the game."""
