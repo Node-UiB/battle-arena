@@ -20,6 +20,7 @@ class Mesh:
         self.center -= B_0
 
         dB = T.max(self.vertices).values
+        self.rect_center = dB / 2
 
         self.width = dB[0].item()
         self.height = dB[1].item()
