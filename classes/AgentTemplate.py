@@ -1,13 +1,12 @@
-import math
 import pygame
-from pygame.math import Vector2
 from Constants import Constants as con
 from .Projectile import Projectile
 
 
 class AgentTemplate(pygame.sprite.Sprite):
-    def __init__(self, pos, all_sprites, bullets) -> None:
+    def __init__(self, position, all_sprites, bullets) -> None:
         super().__init__()
+        self.position = position
         self.image = pygame.Surface([20, 20])
         self.image.fill(con.BLACK)
         self.rect = self.image.get_rect()
@@ -18,17 +17,15 @@ class AgentTemplate(pygame.sprite.Sprite):
     def update(self):
         """Update position of player"""
 
-        self.rect.center = pygame.mouse.get_pos()
+        # self.rect.center = pygame.mouse.get_pos()
 
+    def shoot(self):
         mouse_pressed = pygame.mouse.get_pressed()
 
-        x, y = Vector2(pygame.mouse.get_pos()) - self.rect.center
-        angle = math.degrees(math.atan2(y, x))
+        x, y = pygame.mouse.get_pos()
 
         if mouse_pressed[0]:
             Projectile(
-                pygame.mouse.get_pos(), angle, 5, 0.1, self.all_sprites, self.bullets
+                self.rect.center[0], self.rect.center[1], x, y, 100, 5, self.bullets
             )
-
-    def shoot(self):
         print("pew")

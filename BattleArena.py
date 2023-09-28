@@ -14,7 +14,7 @@ class BattleArena(object):
 
         # Create players
 
-        self.player = AgentTemplate(0, self.all_sprites_list, self.bullet_list)
+        self.player = AgentTemplate((0, 0), self.all_sprites_list, self.bullet_list)
         self.agent_list.add(self.player)
         self.all_sprites_list.add(self.player)
 
