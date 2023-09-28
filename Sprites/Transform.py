@@ -1,7 +1,7 @@
 import torch
 
 from Mesh import Mesh
-from .config import dtype, device
+from config import dtype, device
 from typing import Optional
 
 
@@ -24,6 +24,8 @@ class Transform:
         self.angular_acceleration = initial_angular_acceleration if initial_angular_acceleration is not None else torch.as_tensor(0, dtype=dtype, device=device)
 
         self.static = static
+
+        self._UpdateRotationMatrix()
 
     
     def _UpdateRotationMatrix(self):

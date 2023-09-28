@@ -12,14 +12,16 @@ class Mesh:
 
         self.color = color
 
+        self._FixBounds()
+
 
     def _FixBounds(self):
-        B_0 = T.min(self.vertices).values
+        B_0 = T.min(self.vertices, dim=0).values
 
         self.vertices -= B_0
         self.center -= B_0
 
-        dB = T.max(self.vertices).values
+        dB = T.max(self.vertices, dim=0).values
         self.rect_center = dB / 2
 
         self.width = dB[0].item()
