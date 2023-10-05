@@ -1,6 +1,0 @@
-"""
-Settings & Constants
-
-masse
-
-"""
