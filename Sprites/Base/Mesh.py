@@ -28,4 +28,3 @@ class Mesh:
 
         self.width = dB[0].item()
         self.height = dB[1].item()
-

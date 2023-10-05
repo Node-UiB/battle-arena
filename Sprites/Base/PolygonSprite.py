@@ -1,11 +1,15 @@
 import torch
 import pygame
 
-from Mesh import Mesh
-from Transform import Transform
-from config import dtype, device
+from .Mesh import Mesh
+from .Transform import Transform
+# from config import dtype, device
+from .Config import Config
 
 from typing import Optional
+
+dtype = Config.dtype
+device = Config.device
 
 
 class PolygonSprite(pygame.sprite.Sprite):
@@ -61,7 +65,8 @@ class PolygonSprite(pygame.sprite.Sprite):
         self.UpdateTransformedVertices()
 
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
+def polygon_sprite_test():
     import sys
     from time import time
 
@@ -120,4 +125,3 @@ if __name__ == "__main__":
 
     pygame.quit()
     sys.exit()
-

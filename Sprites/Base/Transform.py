@@ -1,8 +1,13 @@
 import torch
 
-from Mesh import Mesh
-from config import dtype, device
+from .Mesh import Mesh
+
+# from .config import dtype, device
+from .Config import Config
 from typing import Optional
+
+dtype = Config.dtype
+device = Config.device
 
 
 class Transform:
@@ -101,4 +106,3 @@ class Transform:
         return (self.rotation_matrix @ (mesh.vertices - mesh.center)[..., None])[
             ..., 0
         ] + self.position
-
