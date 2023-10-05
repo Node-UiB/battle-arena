@@ -5,15 +5,17 @@ import torch as T
 
 from typing import Tuple
 
+
 class Mesh:
-    def __init__(self, vertices : T.Tensor, center : T.Tensor, color : Tuple[int, int, int]):
+    def __init__(
+        self, vertices: T.Tensor, center: T.Tensor, color: Tuple[int, int, int]
+    ):
         self.vertices = vertices
         self.center = center
 
         self.color = color
 
         self._FixBounds()
-
 
     def _FixBounds(self):
         B_0 = T.min(self.vertices, dim=0).values
@@ -26,3 +28,4 @@ class Mesh:
 
         self.width = dB[0].item()
         self.height = dB[1].item()
+
